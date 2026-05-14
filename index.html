@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一脉贯家国・山海铸红魂</title>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "演示流云楷", sans-serif;
+  font-size: 20px;
+  color: rgba(230, 0, 0, 0.95) !important;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+}
+
+/* 封面首页 */
+#cover {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: url('豆包.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 9999;
+  transition: all 0.8s cubic-bezier(0.16,1,0.3,1);
+  opacity: 1;
+  visibility: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#cover.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cover-title {
+  font-size: 70px;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000, 0 0 3px #000;
+  margin-bottom: 60px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ====================== 【重点修改：按钮样式，完全模仿图片效果】 ====================== */
+.enter-btn {
+  padding: 18px 45px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  border: 3px solid #cc0000;
+  border-radius: 60px;
+  font-size: 20px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: 0.4s;
+  margin-top: 300px;
+  text-shadow: 0 0 2px #000;
+  color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(255,100,100,0.6), 0 0 0 8px rgba(255,150,150,0.3);
+}
+.enter-btn:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px rgba(255,120,120,0.8), 0 0 0 8px rgba(255,180,180,0.5);
+}
+
+.home-btn {
+  position: absolute;
+  padding: 14px 26px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  border: 2px solid #cc0000;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+  text-shadow: 0 0 2px #000;
+  color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(255,100,100,0.6), 0 0 0 6px rgba(255,150,150,0.3);
+}
+.home-btn:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px rgba(255,120,120,0.8), 0 0 0 6px rgba(255,180,180,0.5);
+}
+
+.pav-btn {
+  position: absolute;
+  padding: 11px 20px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  border: 2px solid #cc0000;
+  border-radius: 40px;
+  font-size: 15px;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
+  white-space: nowrap;
+  text-shadow: 0 0 2px #000;
+  color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(255,100,100,0.6), 0 0 0 6px rgba(255,150,150,0.3);
+}
+.pav-btn:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  box-shadow: 0 0 0 3px rgba(255,120,120,0.8), 0 0 0 6px rgba(255,180,180,0.5);
+}
+
+.back {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 999;
+  transition: 0.3s;
+  text-shadow: 0 0 2px #000;
+  color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(255,100,100,0.6), 0 0 0 6px rgba(255,150,150,0.3);
+}
+.back:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  box-shadow: 0 0 0 3px rgba(255,120,120,0.8), 0 0 0 6px rgba(255,180,180,0.5);
+}
+
+#nextPageBtn {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 32px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  border: 2px solid #cc0000;
+  border-radius: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  text-shadow: 0 0 2px #000;
+  color: #fff !important;
+  box-shadow: 0 0 0 3px rgba(255,100,100,0.6), 0 0 0 6px rgba(255,150,150,0.3);
+}
+#nextPageBtn:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  box-shadow: 0 0 0 3px rgba(255,120,120,0.8), 0 0 0 6px rgba(255,180,180,0.5);
+}
+
+#quizNext, #quizBack {
+  padding: 12px 30px;
+  background: linear-gradient(180deg, #ff6666 0%, #cc0000 50%, #990000 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px;
+  text-shadow: 0 0 2px #fff;
+  box-shadow: 0 0 0 3px rgba(255,100,100,0.6), 0 0 0 6px rgba(255,150,150,0.3);
+}
+#quizNext:hover, #quizBack:hover {
+  background: linear-gradient(180deg, #ff8888 0%, #dd2222 50%, #aa1111 100%);
+  box-shadow: 0 0 0 3px rgba(255,120,120,0.8), 0 0 0 6px rgba(255,180,180,0.5);
+}
+/* ====================== 按钮修改结束 ====================== */
+
+/* 序厅 */
+#home {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: url('新对话 (2).png');
+  background-size: cover;
+  background-position: center;
+  z-index: 10;
+  transition: all 0.7s cubic-bezier(0.16,1,0.3,1);
+  opacity: 0;
+  visibility: hidden;
+}
+#home.show {
+  opacity: 1;
+  visibility: visible;
+}
+#home.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#home .main-title {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 62px;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000;
+  margin-top: -80px;
+}
+#home .main-desc {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 800px;
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: center;
+  text-shadow: 0 0 2px #000;
+  margin-top: -80px;
+}
+
+#btn1 { top: 45%; left: 30%; }
+#btn2 { top: 45%; left: 45%; }
+#btn3 { top: 45%; left: 60%; }
+#btn4 { top: 65%; left: 30%; }
+#btn5 { top: 65%; left: 62%; }
+#btnQuiz { top: 77%; left: 49%; transform: translateX(-50%); } /* 答题游戏按钮 */
+
+/* 子展馆 */
+.pavilion {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.pavilion.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pav-title {
+  position: absolute;
+  top: 12%;
+  left: 6%;
+  font-size: 44px;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000;
+}
+.pav-desc {
+  position: absolute;
+  top: 23%;
+  left: 6%;
+  font-size: 19px;
+  max-width: 650px;
+  line-height: 1.6;
+  text-shadow: 0 0 2px #000;
+}
+
+/* 详情全屏 */
+#detail {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+#detail.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.detail-title {
+  position: absolute;
+  top: 14%;
+  left: 6%;
+  font-size: 46px;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000;
+}
+.detail-desc {
+  position: absolute;
+  top: 27%;
+  left: 6%;
+  font-size: 20px;
+  max-width: 720px;
+  line-height: 1.6;
+  text-shadow: 0 0 2px #000;
+}
+
+/* -------------------- 【新增：答题游戏页面】 -------------------- */
+#quizPage {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: url('新对话 (2).png');
+  background-size: cover;
+  background-position: center;
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.7s;
+}
+#quizPage.show { opacity: 1; visibility: visible; }
+.quiz-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px;
+  background: rgba(255,255,255,0.85);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+.quiz-question {
+  font-size: 24px;
+  color: #900 !important;
+  margin-bottom: 30px;
+  text-shadow: 0 0 2px #900;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.quiz-option {
+  padding: 12px;
+  background: #fff;
+  border: 2px solid #900;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333 !important;
+}
+.quiz-option:hover { background: #ffebee; }
+.quiz-score {
+  font-size: 22px;
+  color: #b00 !important;
+  margin-top: 20px;
+  text-shadow: 0 0 2px #b00;
+}
+
+/* -------------------- 【新增：多页详情（家国融合专用）】 -------------------- */
+#multiDetail {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  z-index: 35;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.7s;
+}
+#multiDetail.show { opacity: 1; visibility: visible; }
+
+/* 手机适配 */
+@media (max-width:768px) {
+  .cover-title { font-size: 42px; }
+  #home .main-title { font-size: 38px; }
+  #home .main-desc { font-size: 16px; max-width:90%; }
+  .pav-title { font-size:28px; }
+  .pav-desc { font-size:15px; max-width:88%; }
+  .detail-title { font-size:32px; }
+  .detail-desc { font-size:16px; max-width:88%; }
+  .back { top:20px; right:20px; width:46px; height:46px; }
+  .quiz-box { width: 90%; padding: 25px; }
+}
+
+/* 高亮样式 */
+.highlight {
+  color: #FFD700 !important;
+  font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- 封面 -->
+<div id="cover">
+  <div class="cover-title"></div>
+  <div class="enter-btn" id="enterBtn">点击进入展馆</div>
+</div>
+
+<!-- 序厅 -->
+<div id="home">
+  <div class="main-title">序厅</div>
+  <div class="main-desc">
+    山海为卷，红脉如弦。八闽大地以峰峦为骨，以江海为魂，
+    镌刻下一段段热血峥嵘岁月。从星火初燃到薪火相传，从闽地风骨到家国情怀，在光影间回望初心，于岁月中赓续精神，让红色根脉绵延不息。
+  </div>
+
+  <div class="home-btn" id="btn1" data-pav="pav1">山海底色</div>
+  <div class="home-btn" id="btn2" data-pav="pav2">革命人物</div>
+  <div class="home-btn" id="btn3" data-pav="pav3">历史事件</div>
+  <div class="home-btn" id="btn4" data-pav="pav4">家国融合</div>
+  <div class="home-btn" id="btn5" data-pav="pav5">尾厅</div>
+  <div class="home-btn" id="btnQuiz">🔴 福建革命历史闯关</div> <!-- 新增答题按钮 -->
+</div>
+
+<!-- 山海底色 -->
+<div class="pavilion" id="pav1" style="background-image: url('福建.png')">
+  <div class="pav-title">山海为卷・红脉植根</div>
+  <div class="pav-desc">福建山海格局，是中国革命重要的空间载体，孕育了红色基因。</div>
+  <div class="pav-btn" style="top:20%;left:65%" data-img="山.png" data-title="武夷山" data-desc="<span class='highlight'>闽粤赣三省交界的深谷高山区，红色苏区天然堡垒武夷山脉</span>边界的红色屏障、南方游击战争的重要阵地，南延、玳瑁山、博平岭纵贯，千米高峰密集、岭谷交错、封闭性强。山河铭刻峥嵘过往，林海诉说英雄事迹，先辈以青山为盾、以初心为炬，铸就的红色风骨代代相传，绵延青山万里，精神生生不息。">武夷山</div>
+  <div class="pav-btn" style="top:35%;left:40%" data-img="山区.png" data-title="闽西山区" data-desc="武夷山脉主脊盘踞，坐拥华东屋脊黄岗山；地势雄峙闽赣边界，自古为关隘要地。<span class='highlight'>土地革命时期的核心苏区、中央革命根据地重要组成部分，更是燎原南方的革命摇篮。</span>群山阻隔风雨，却挡不住革命思潮的蓬勃涌动，烽火岁月里，老区儿女同心向党，用热血与坚守守护革命根基，厚重的红色记忆浸润山野，革命精神扎根乡土，永续传承。">闽西山区</div>
+  <div class="pav-btn" style="top:40%;left:60%" data-img="闽江.png" data-title="闽江流域" data-desc="<span class='highlight'>河谷狭长、江道贯通闽地上下游，依山傍水、串连山间盆地。江河为天然通道，<span class='highlight'>河谷盆地易聚居、易驻守，串联起沿线革命据点，是红色力量沿江辐射的关键脉络。江流奔涌见证烽火征程，水岸城乡镌刻奋斗印记，在动荡岁月中默默承载革命使命，</span>悠悠闽江</span>水，缓缓流淌百年红色荣光，滋养八闽红色沃土。">闽江流域</div>
+  
+  <div class="pav-btn" style="top:90%;left:45%" 
+    data-type="multi" 
+    data-pages="3"
+    data-img1="厦1.jpg" data-title1="厦门" data-desc1="<span class='highlight'>厦门</span>，东南沿海的滨海古城，亦是<span class='highlight'>闽南地区红色觉醒与革命探索的前沿阵地。</span>山海相拥之间，进步思潮率先传播，革命先辈立足滨海口岸，秘密开展革命活动，组织进步力量，唤醒民众觉醒，在侨乡与沿海之地播撒红色种子。鹭岛潮起潮落，铭记革命先辈的探索与抗争，于开放滨海之地坚守革命信仰，红色基因融入海风潮汐，历经岁月洗礼，初心历久弥坚。"
+    data-img2="厦2.png" data-title2="漳州" data-desc2="漳州，<span class='highlight'>闽南>红土地上的革命重镇，</span>深藏闽南山城的烽火记忆与英雄情怀。广袤乡野、山城巷陌间，留存着诸多革命旧址与斗争印记，工农运动蓬勃兴起，地方武装奋勇抗争，配合闽西苏区开展革命行动，守护闽南片区红色战线。九龙江畔浸润热血初心，<span class='highlight'>千年古城承载红色过往，老区人民赤诚向党，以坚韧与勇毅书写革命篇章，红色薪火温润古城，代代赓续不绝。</span>"
+    data-img3="厦3.png" data-title3="泉州" data-desc3="<span class='highlight'>泉州</span>，海丝名城、侨乡故里，更是闽南<span class='highlight'>革命运动的重要策源地与力量聚集地。</span>这座烟火古城兼具山海格局与侨缘底蕴，革命先辈隐秘开展地下革命工作，联结海内外进步力量，凝聚侨心侨力支援革命事业，在繁华市井与山海之间坚守革命理想。古城街巷藏烽火，海丝文脉映初心，百年风云流转，<span class='highlight'>红色精神</span>与闽南文脉相融共生，先辈的奋斗之志，照亮古城前行之路。">
+    厦漳泉
+  </div>
+
+</div>
+
+<!-- 革命人物 -->
+<div class="pavilion" id="pav2" style="background-image: url('革命人物.png')">
+  <div class="pav-title">闽人铸魂・群星闪耀</div>
+  <div class="pav-desc">闽籍革命先驱以生命赴使命，书写家国担当。</div>
+  <div class="pav-btn" style="top:30%;left:15%" data-img="林.png" data-title="林则徐" data-desc="闽籍先贤林则徐的故事，藏着闽地儿女的家国情怀。他生于福建福州，自幼浸润闽山闽水风骨。心怀苍生家国，临危受命南下禁烟，虎门销烟震彻中外。纵使遭贬流放，仍心系社稷百姓，以一身凛然气节，尽显福建人赤诚忠义、勇担家国的赤子本色。">林则徐</div>
+  <div class="pav-btn" style="top:30%;left:40%" data-img="严复.png" data-title="严复：开眼看世界的闽学巨擘" data-desc="严复，福建侯官人，近代极具影响力的资产阶级启蒙思想家、翻译家。作为福建走出的学界泰斗，他系统地将西方的社会学、政治学、政治经济学、哲学和自然科学引入中国，翻译的《天演论》振聋发聩，以 “物竞天择，适者生存” 唤醒了无数国人，成为近代中国开启民智的思想先驱，让闽地敢为人先的精神在华夏大地传扬。">严复</div>
+  <div class="pav-btn" style="top:30%;left:65%" data-img="林觉民.png" data-title="林觉民：侠之大者 闽地英魂" data-desc="林觉民，福建闽县人，黄花岗七十二烈士之一。他是那个觉醒年代里，为了家国理想燃烧生命的福建热血儿郎。<span class='highlight'>在广州起义前夜，他写下字字泣血的《与妻书》</span>，将对爱妻的眷恋藏于笔墨，将光复中华的壮志扛于肩头，以 24 岁的年轻生命，践行了闽籍志士 “以天下人为念” 的家国担当。">林觉民</div>
+  <div class="pav-btn" style="top:50%;left:25%" data-img="福人.jpg" data-title="闽籍红军战士" data-desc="​​八闽沃土孕育无数革命英雄，闽西儿女怀揣赤子初心奔赴家国征程。少年吴行敏挣脱压迫毅然参军，三过草地、救死扶伤，以青春扛起革命重任；陈树湘率领闽西子弟组成的绝命后卫师，血战湘江、浴血断后，被俘后宁死不屈、壮烈殉国。无数闽籍英烈，或是冲锋沙场，或是默默坚守，<span class='highlight'>以热血铸忠诚，用生命守信仰，让红色精神永照八闽山河。</span>">群体人物</div>
+</div>
+
+<!-- 历史事件 -->
+<div class="pavilion" id="pav3" style="background-image: url('历.png')">
+  <div class="pav-title">史迹留痕・大道同行</div>
+  <div class="pav-desc">重大革命事件，镌刻福建与国家同频的历史印记。</div>
+  <div class="pav-btn" style="top:35%;left:20%" data-img="古.png" data-title="古田会议" data-desc="古田会议1929年在福建上杭召开，确立思想建党、政治建军原则，奠定党对军队绝对领导根基。<span class='highlight'>会议决议成为全党全军建党建军纲领，其经验从福建走向全国，为各地革命根据地建设、人民军队发展提供根本范式，深刻影响中国革命全局进程。</span>">古田会议</div>
+  <div class="pav-btn" style="top:35%;left:55%" data-img="才.png" data-title="才溪乡调查" data-desc="才溪乡调查在福建上杭开展，是我党群众路线与实事求是调研的典范。<span class='highlight'>通过实地解剖基层治理与苏区建设样板，总结出政权建设、经济发展、拥军支前的宝贵经验，从福建推向全国各苏区，为革命根据地治理与民生建设提供重要实践范本。</span>">才溪乡调查</div>
+  <div class="pav-btn" style="top:55%;left:25%" data-img="江.png" data-title="湘江战役" data-desc="血色浸江的湘江战役中，以福建子弟为主的红 34 师担任后卫，以全军覆没的代价掩护中央突围，铸就了共产党人视死如归的不朽丰碑；<span class='highlight'>为长征胜利乃至中国革命胜利写下了不朽的福建注脚。</span>">湘江战役</div>
+  <div class="pav-btn" style="top:58%;left:60%" data-img="永安.png" data-title="永安抗战" data-desc="抗战中，福建永安作为战时省会，汇聚进步文化力量，成为全国三大抗战文化中心之一。以笔为枪、以刊为阵，出版大量书刊、创作抗战文艺，<span class='highlight'>高举抗日民族统一战线旗帜，其文化救亡经验从福建辐射东南、影响全国，成为国统区抗战文化的典范。</span>">永安抗战</div>
+</div>
+
+<!-- 家国融合（已优化翻页） -->
+<div class="pavilion" id="pav4" style="background-image: url('家.png')">
+  <div class="pav-title">家国同频・薪火相传</div>
+  <div class="pav-desc">福建省革命历史纪念馆将地方叙事与国家叙事深度融合，让人们从“福建故事”中看到“中国道路”的正确性。既将地方革命史讲出<span class='highlight'>“国家高度”</span>又赋予中国革命主线<span class='highlight'>“地方温度”</span>，最终实现<span class='highlight'>地方情感与国家认同的有机统一和传承红色基因、强化国家认同的双向赋能。</span></div>
+
+  <!-- 1 认同统一（2页） -->
+  <div class="pav-btn" style="top:48%;left:22%" data-type="multi" data-pages="2"
+    data-img1="一.png" data-title1="地方奋斗，汇入家国宏图" data-desc1="八闽山河承载百年红色记忆，福建革命奋斗史从来不是一隅之地的独行，而是融入民族独立、国家崛起的宏大进程。从闽西苏区燎原星火，到山海儿女挺身而出，一代代福建人民<span class='highlight'>以乡土之力呼应时代使命，让一方土地的坚守，沉淀为国家发展的红色根基。</span>"
+    data-img2="二.png" data-title2="赓续红色根脉，厚植本土认同" data-desc2="独有的福建红色文化，是属于八闽儿女的共同精神印记。回望本土革命岁月，读懂家乡的热血过往，方能明晰地域风骨与家国情怀的深层联结。传承红色基因，唤醒集体记忆，在回望历史中强化乡土归属感，让红色力量成为当代福建人自信自强的精神源泉。">
+    认同统一
+  </div>
+
+  <!-- 2 红色基因传承（6页） -->
+  <div class="pav-btn" style="top:48%;left:55%" data-type="multi" data-pages="6"
+    data-img1="苏.jpg" data-title1="苏区精神" data-desc1="福建作为中央苏区的主要组成部分，为南方革命根据地的发展筑牢了根基。中国革命正是由此走向全国，革命红旗从这里走向四方，星星之火从此开始燎原。红色福建，光耀千秋，历久弥新的苏区精神，将在岁月长河中生生不息"
+    data-img2="长征.png" data-title2="长征精神" data-desc2="红土浸染的长汀中复村，作为红军长征的出发地，为万里征途的开篇写下了壮美的序章。中央红军正是由此踏上远征，红色铁流从这里奔向湘赣，革命火种从此点燃征途。长征起点，薪火相传，历久弥坚的长征精神，将在时代征程中永放光芒。"
+    data-img3="抗.png" data-title3="抗战精神" data-desc3="烽火淬炼的永安山城，作为抗战时期福建临时省会，为东南抗日文化阵地筑牢坚实屏障。进步文人正是于此汇聚集结，以笔墨为利刃刺破阴霾，抗日文脉从此绵延回响。抗战文脉，薪火永续，<span class='highlight'>底蕴深厚的永安抗战精神，将在山河岁月中熠熠生辉。</span>"
+    data-img4="4.png" data-title4="传承篇章" data-desc4="新中国成立以来，在党的坚强领导下，八闽儿女凝心聚力、艰苦奋斗，福建从革命老区、海防前线蝶变为开放前沿，实现沧桑巨变。步入新时代，全省牢记殷殷嘱托，锚定宏伟蓝图勇毅前行，奋力书写新时代新福建高质量发展的崭新答卷。"
+    data-img5="5.png" data-title5="蓬勃发展" data-desc5="在红色文脉的浸润滋养下，鹭岛厦门赓续革命初心、勇立时代潮头。全市上下凝心聚力开拓进取，依托滨海区位优势深耕开放发展，在红色基因的赋能之下，奋力书写现代化滨海都市高质量发展的崭新篇章。"
+    data-img6="6.png" data-title6="魂脉永续" data-desc6="匠心雕琢的影雕《闽之魂》，诞生于 1998 年，以恢弘形制镌刻八闽荣光。作品以革命旧址与历史文物铺展成绵长五线谱，百余位英烈化作跃动音符，融汇成福建百年求索、奋勇抗争的壮阔史诗。">
+    红色基因传承
+  </div>
+
+  <div class="pav-btn" style="top:110%;left:110%" data-img="https://picsum.photos/1920/1080?random=59" data-title="地方革命→国家道路" data-desc="【替换：简介】"></div>
+</div>
+
+<!-- 尾厅 -->
+<div class="pavilion" id="pav5" style="background-image: url('尾巴.png')">
+  <div class="pav-title">赓续红脉</div>
+  <div class="pav-desc">闽山闽水，镌刻着红色记忆；闽人闽心，传承着不朽信仰福建的革命荣光，早已融入山海血脉。愿我们赓续红脉、勇担使命，让这片土地的忠勇风骨，在新时代续写新的荣光。</div>
+</div>
+
+<!-- 普通详情 -->
+<div id="detail">
+  <div class="detail-title"></div>
+  <div class="detail-desc"></div>
+</div>
+
+<!-- 多页详情（翻页专用） -->
+<div id="multiDetail">
+  <div class="detail-title"></div>
+  <div class="detail-desc"></div>
+  <button id="nextPageBtn">点击翻页</button>
+</div>
+
+<!-- 答题游戏页面 -->
+<div id="quizPage">
+  <div class="quiz-box">
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-score" id="quizScore"></div>
+    <button id="quizNext">下一题</button>
+    <button id="quizBack">返回序厅</button>
+  </div>
+</div>
+
+<!-- 返回 -->
+<div class="back" id="backBtn">←</div>
+
+<script>
+const cover = document.getElementById('cover');
+const enterBtn = document.getElementById('enterBtn');
+const home = document.getElementById('home');
+const backBtn = document.getElementById('backBtn');
+const detail = document.getElementById('detail');
+const multiDetail = document.getElementById('multiDetail');
+const nextPageBtn = document.getElementById('nextPageBtn');
+const quizPage = document.getElementById('quizPage');
+let lastPav = null;
+let currentPage = 1, totalPages = 0;
+let pageData = {};
+
+// 进入序厅
+enterBtn.addEventListener('click', () => {
+  cover.classList.add('hide');
+  home.classList.add('show');
+});
+
+// 展厅按钮
+document.querySelectorAll('.home-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(btn.id === 'btnQuiz'){
+      home.classList.remove('show');
+      quizPage.classList.add('show');
+      startQuiz();
+      return;
+    }
+    const pav = document.getElementById(btn.dataset.pav);
+    home.classList.remove('show');
+    pav.classList.add('show');
+    lastPav = pav;
+  });
+});
+
+// 子展馆按钮
+document.querySelectorAll('.pav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(btn.dataset.type === 'multi'){
+      detail.classList.remove('show');
+      currentPage = 1;
+      totalPages = Number(btn.dataset.pages);
+      pageData = btn.dataset;
+      loadMultiPage();
+      multiDetail.classList.add('show');
+      lastPav.classList.remove('show');
+    }else{
+      multiDetail.classList.remove('show');
+      detail.style.backgroundImage = `url('${btn.dataset.img}')`;
+      document.querySelector('.detail-title').innerText = btn.dataset.title;
+      document.querySelector('.detail-desc').innerHTML = btn.dataset.desc;
+      lastPav.classList.remove('show');
+      detail.classList.add('show');
+    }
+  });
+});
+
+// 翻页逻辑
+function loadMultiPage(){
+  multiDetail.style.backgroundImage = `url('${pageData['img'+currentPage]}')`;
+  document.querySelector('#multiDetail .detail-title').innerText = pageData['title'+currentPage];
+  document.querySelector('#multiDetail .detail-desc').innerHTML = pageData['desc'+currentPage];
+  if(currentPage >= totalPages){
+    nextPageBtn.innerText = '返回展馆';
+  }else{
+    nextPageBtn.innerText = '点击翻页';
+  }
+}
+nextPageBtn.addEventListener('click', ()=>{
+  if(currentPage >= totalPages){
+    multiDetail.classList.remove('show');
+    lastPav.classList.add('show');
+  }else{
+    currentPage++;
+    loadMultiPage();
+  }
+});
+
+// -------------------- 答题游戏 --------------------
+let quizCurrent = 0, quizScore = 0;
+const quizList = [
+  // ========== 可替换题目区域 ==========
+  { q:"第一题：中央红军进漳战役发生在哪一年？？", a:"C", o:["A 1930年","B .1931年","C 1932年","D 1933年"] },
+  { q:"第二题：才溪乡调查是哪位领导人在福建上杭开展的重要调研？", a:"B", o:["A 周恩来","B 毛泽东","C 朱德","D 刘少奇"] },
+  { q:"第三题：被誉为 “红军长征出发地” 的福建红色圣地是？", a:"B", o:["A 福州三坊七巷","B 长汀中复村","C 龙岩古田会议旧址","D 宁化红军出发地"] },
+  { q:"第四题：古田会议召开的地点位于福建哪个地市", a:"A", o:["A 三明","B 漳州","C 南平","D 龙岩"] },
+  { q:"第五题：以下哪处不属于福建著名红色革命旧址？", a:"D", o:["A 永安抗战旧址群","B 长汀红色旧址群","C 才溪乡调查纪念馆","D 鼓浪屿菽庄花园"] }
+];
+function startQuiz(){
+  quizCurrent = 0;
+  quizScore = 0;
+  loadQuiz();
+}
+function loadQuiz(){
+  const q = quizList[quizCurrent];
+  document.getElementById('quizQuestion').innerText = `第${quizCurrent+1}题：${q.q}`;
+  const optBox = document.getElementById('quizOptions');
+  optBox.innerHTML = '';
+  q.o.forEach((item,i)=>{
+    const o = document.createElement('div');
+    o.className = 'quiz-option';
+    o.innerText = item;
+    o.onclick = ()=>{
+      if(['A','B','C','D'][i] === q.a) quizScore += 20;
+      quizCurrent++;
+      if(quizCurrent >= quizList.length){
+        document.getElementById('quizScore').innerText = `答题完成！得分：${quizScore} 分`;
+        document.getElementById('quizNext').style.display = 'none';
+      }else{
+        loadQuiz();
+      }
+    };
+    optBox.appendChild(o);
+  });
+  document.getElementById('quizScore').innerText = `当前得分：${quizScore}`;
+  document.getElementById('quizNext').style.display = quizCurrent >= quizList.length ? 'none' : 'inline-block';
+}
+document.getElementById('quizBack').onclick = ()=>{
+  quizPage.classList.remove('show');
+  home.classList.add('show');
+};
+
+// 返回按钮
+backBtn.addEventListener('click', () => {
+  if(multiDetail.classList.contains('show')){
+    multiDetail.classList.remove('show');
+    lastPav.classList.add('show');
+  }else if(detail.classList.contains('show')){
+    detail.classList.remove('show');
+    lastPav.classList.add('show');
+  }else if(quizPage.classList.contains('show')){
+    quizPage.classList.remove('show');
+    home.classList.add('show');
+  }else{
+    document.querySelectorAll('.pavilion').forEach(p => p.classList.remove('show'));
+    home.classList.add('show');
+  }
+});
+</script>
+</body>
+</html>
